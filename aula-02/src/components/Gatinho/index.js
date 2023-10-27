@@ -1,4 +1,4 @@
-export default function Gatinho({ id, url, width, height }) {
+function Gatinho({ id, url, width, height }) {
   return (
     <div>
       <h2>Id da Imagem: {id}</h2>
@@ -6,3 +6,5 @@ export default function Gatinho({ id, url, width, height }) {
     </div>
   );
 }
+
+export default Gatinho;

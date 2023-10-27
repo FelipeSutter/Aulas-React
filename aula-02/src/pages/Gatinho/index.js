@@ -1,6 +1,6 @@
-import Gato from "../Gatinho";
+import Gatinho from "../../components/Gatinho";
 
-export default function Gatinho() {
+function GatinhoFoto() {
   const gatinhos = [
     {
       id: "2nm",
@@ -65,11 +65,19 @@ export default function Gatinho() {
   ];
 
   return (
-    <>
+    <div className="container">
       <h1>Gatinhos fofos!</h1>
       {gatinhos.map((foto) => (
-        <Gato url={foto.url} width={foto.width} height={foto.height} />
+        <Gatinho
+          key={foto.id}
+          id={foto.id}
+          url={foto.url}
+          width={foto.width}
+          height={foto.height}
+        />
       ))}
-    </>
+    </div>
   );
 }
+
+export default GatinhoFoto;
