@@ -4,7 +4,18 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
+
   const [count, setCount] = useState(0)
+  const [nome, setNome] = useState("Vite + React");
+
+  const prova = () =>  {
+    console.log("Eu sou a função prova!");
+    setCount(prevState => prevState + 1);
+    setCount(count => count + 1);
+    setCount(count => count + 1);
+    setNome("Alterei o nome na tela!");
+
+  };
 
   return (
     <>
@@ -16,9 +27,12 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <h1>{nome}</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <input type="text" placeholder='Digite aqui' value={nome} onChange={(e) => setNome(e.target.value)}/>
+        </div>
+      <div className="card">
+        <button onClick={() => prova()}>
           count is {count}
         </button>
         <p>
