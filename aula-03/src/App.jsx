@@ -6,7 +6,11 @@ import './App.css'
 function App() {
 
   const [count, setCount] = useState(0)
-  const [nome, setNome] = useState("Vite + React");
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [idade, setIdade] = useState("");
+
+
 
   const prova = () =>  {
     console.log("Eu sou a função prova!");
@@ -15,6 +19,25 @@ function App() {
     setCount(count => count + 1);
     setNome("Alterei o nome na tela!");
 
+  };
+
+  const cadastrar = () => {
+
+    // cria um objeto de informações dentro da função
+    const infos = {
+      nome : nome,
+      email : email,
+      idade : idade,
+    };
+
+    // mostra a informação no console e limpa os campos
+    console.log(infos);
+    setNome("");
+    setEmail("");
+    setIdade("");
+
+    // salva as informações no localStorage em formato de string utilizando o JSON.stringify
+    localStorage.setItem('info', JSON.stringify(infos));
   };
 
   return (
@@ -28,9 +51,20 @@ function App() {
         </a>
       </div>
       <h1>{nome}</h1>
+      <div>
+        <input type="text" placeholder='Digite seu nome' value={nome} onChange={(e) => setNome(e.target.value)}/>
+      </div>
+      <div>
+        <input type="email" placeholder='Digite seu email' value={email} onChange={(e) => setEmail(e.target.value)}/>
+      </div>
+      <div>
+        <input type="number" placeholder='Digite sua idade' value={idade} onChange={(e) => setIdade(e.target.value)}/>
+      </div>
       <div className="card">
-        <input type="text" placeholder='Digite aqui' value={nome} onChange={(e) => setNome(e.target.value)}/>
-        </div>
+        <button onClick={cadastrar}>
+          Cadastrar
+        </button>
+      </div>
       <div className="card">
         <button onClick={() => prova()}>
           count is {count}
