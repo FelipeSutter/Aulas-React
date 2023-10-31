@@ -1,6 +1,5 @@
 import { useState } from "react";
 import loginButton from "./assets/loginImg48x48.png";
-import "./index.css";
 
 function Login() {
   const [nome, setNome] = useState("");
@@ -20,7 +19,7 @@ function Login() {
   };
 
   return (
-    <>
+    <div className="container">
       <h1>Faça seu Login</h1>
       <div className="input-space">
         <input
@@ -41,7 +40,7 @@ function Login() {
       <button onClick={cadastrar}>
         <img src={loginButton} />
       </button>
-    </>
+    </div>
   );
 }
 
