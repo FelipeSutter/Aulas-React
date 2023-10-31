@@ -1,12 +1,15 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 export default function Login() {
   const [nome, setNome] = useState("");
   const [senha, setSenha] = useState("");
+  const { contato } = useParams();
   const navigate = useNavigate();
+
+  const { state } = useLocation();
 
   const dados = {
     login: "Felipe",
@@ -36,6 +39,7 @@ export default function Login() {
   return (
     <div className="container p-5 my-5 border">
       <h1>Página de Login</h1>
+      <h2>Contato: {state == undefined ? "0000-0000" : state}</h2>
       <form>
         <label>
           <input

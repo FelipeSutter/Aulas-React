@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <div>
-      <h2>Seja bem-vindo(a), {nome}!</h2>
+      <h2>Seja bem-vindo(a), {nome == undefined ? "Usuário" : nome}!</h2>
       <h1>Home</h1>
     </div>
   );

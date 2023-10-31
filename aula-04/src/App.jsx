@@ -26,6 +26,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/login/:contato" element={<Login />} />
         <Route path="/home/" element={<Home />} />
         <Route path="/home/:nome" element={<Home />} />
         <Route path="/contato" element={<Contato />} />
