@@ -1,13 +1,14 @@
 import { useState } from "react";
-import Navbar from "../../components/Navbar";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [nome, setNome] = useState("");
   const [senha, setSenha] = useState("");
+  const navigate = useNavigate();
 
   const cadastrar = () => {
-    if (nome == "" || senha == "") {
-      console.log("Preencha todos os campos!");
+    if (nome == "Felipe" && senha == "1234") {
+      navigate(`/home/${nome}`);
     } else {
       const infos = {
         nome: nome,
