@@ -7,7 +7,7 @@ import Navbar from "./components/Navbar";
 import { useState, useParams } from "react";
 import MeuNome from "./components/teste/teste";
 import Welcome from "./components/teste/welcome";
-import "bootstrap/dist/css/bootstrap.min.css";
+//import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   //   const [nome, setNome] = useState("");

@@ -8,27 +8,35 @@ export default function Login() {
   const [senha, setSenha] = useState("");
   const navigate = useNavigate();
 
+  const dados = {
+    login: "Felipe",
+    senha: "1234",
+  };
+
   const cadastrar = () => {
-    const infos = {
-      nome: nome,
-      senha: senha,
-    };
+    if (nome == "" || senha == "") {
+      alert("Preencha todos os campos.");
+    } else if (nome == dados.login && senha == dados.senha) {
+      const infos = {
+        nome: nome,
+        senha: senha,
+      };
+      localStorage.setItem("infos", JSON.stringify(infos));
 
-    if (nome == "Felipe" && senha == "1234") {
       navigate(`/home/${nome}`);
+
+      console.log(infos);
+      setNome("");
+      setSenha("");
+    } else {
+      alert("Login ou senha inválidos.");
     }
-
-    localStorage.setItem("infos", JSON.stringify(infos));
-
-    console.log(infos);
-    setNome("");
-    setSenha("");
   };
 
   return (
     <div className="container p-5 my-5 border">
       <h1>Página de Login</h1>
-      {/* <form>
+      <form>
         <label>
           <input
             type="text"
@@ -51,9 +59,9 @@ export default function Login() {
         <button type="button" onClick={cadastrar}>
           Entrar
         </button>
-      </form> */}
+      </form>
 
-      <Form>
+      {/* <Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Nome</Form.Label>
           <Form.Control
@@ -76,7 +84,7 @@ export default function Login() {
         <Button variant="primary" type="button" onClick={cadastrar}>
           Entrar
         </Button>
-      </Form>
+      </Form> */}
     </div>
   );
 }
