@@ -11,7 +11,7 @@ export default function Navbar() {
               <Link to={"/"}>Login</Link>
             </li>
             <li>
-              <Link to={`/home/nome`}>Home</Link>
+              <Link to={`/home`}>Home</Link>
             </li>
             <li>
               <Link to={"/contato"}>Contato</Link>
