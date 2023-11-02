@@ -31,7 +31,19 @@ function TaskList() {
     }
   };
 
-  // TODO: FAZER MÉTODO DE EDITAR - PUT
+  // TODO: FAZER MÉTODO DE EDITAR - PUT DICA: vai ser parecido com o cadastrar, tenho que saber qual objeto estou editando.
+
+  const editar = async (id) => {
+    console.log(`Editar tarefa: ${id}`);
+    try {
+      const { data } = await axios.put(`${url}/${id}`);
+      console.log(data);
+      const arrayFiltrado = tarefas.filter((item) => item.id != id);
+      setTarefas(arrayFiltrado);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const excluir = async (id) => {
     console.log(`Excluir tarefa: ${id}`);
@@ -89,7 +101,7 @@ function TaskList() {
         <section className="my-border">
           <h2>Lista de tarefas</h2>
           {tarefas.map((item) => (
-            <Task key={item.id} item={item} fn={excluir} />
+            <Task key={item.id} item={item} excluir={excluir} editar={editar} />
           ))}
         </section>
       </main>
