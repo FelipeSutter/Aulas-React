@@ -34,12 +34,19 @@ function TaskList() {
   // TODO: FAZER MÉTODO DE EDITAR - PUT DICA: vai ser parecido com o cadastrar, tenho que saber qual objeto estou editando.
 
   const editar = async (id) => {
-    console.log(`Editar tarefa: ${id}`);
+    const task = {
+      title: "alta",
+    };
     try {
-      const { data } = await axios.put(`${url}/${id}`);
+      const { data } = await axios.put(`${url}/${id}`, task);
+      const arrayEditado = tarefas.map((item) => {
+        if (id == item.id) {
+          return data;
+        }
+        return item;
+      });
       console.log(data);
-      const arrayFiltrado = tarefas.filter((item) => item.id != id);
-      setTarefas(arrayFiltrado);
+      setTarefas(arrayEditado);
     } catch (e) {
       console.log(e);
     }

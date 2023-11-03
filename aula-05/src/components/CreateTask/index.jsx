@@ -1,14 +1,20 @@
+import { Titulo, TituloAmarelo } from "../StyledComponents/styled";
+
 function Input({ value, setValue, cadastrar }) {
   return (
     <div>
-      <h2>Cadastre sua tarefa</h2>
+      <Titulo>Cadastre sua tarefa</Titulo>
+      <TituloAmarelo>Cadastre sua tarefa</TituloAmarelo>
+
       <input
         type="text"
         placeholder="Título"
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-      <button onClick={cadastrar}>Cadastrar</button>
+      <button onClick={cadastrar} className="m-4 btn-btn-primary">
+        Cadastrar
+      </button>
     </div>
   );
 }
