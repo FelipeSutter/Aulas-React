@@ -1,6 +1,6 @@
 import { Titulo, TituloAmarelo } from "../StyledComponents/styled";
 
-function Input({ value, setValue, cadastrar }) {
+function CreateTask({ value, setValue, cadastrar }) {
   return (
     <div>
       <Titulo>Cadastre sua tarefa</Titulo>
@@ -19,4 +19,4 @@ function Input({ value, setValue, cadastrar }) {
   );
 }
 
-export default Input;
+export default CreateTask;

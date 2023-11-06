@@ -1,13 +1,9 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
 import TaskList from "./pages/TaskList";
+import Rotas from "./routes";
 
 function App() {
-  return (
-    <Routes>
-      <Route path="/tasklist" element={<TaskList />}></Route>
-    </Routes>
-  );
+  return <Rotas />;
 }
 
 export default App;

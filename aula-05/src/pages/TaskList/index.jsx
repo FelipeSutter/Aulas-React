@@ -1,119 +1,125 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import "./style.css";
+import api from "../../services/api";
 import Task from "../../components/Task";
 import CreateTask from "../../components/CreateTask";
+import { AuthContext } from "../../context/AuthContext";
 
-const url = "https://6542c2c401b5e279de1f8b8f.mockapi.io/tasklist";
+const url = "https://6542c27001b5e279de1f8a8c.mockapi.io/tasklist";
 
-function TaskList() {
+const TaskList = () => {
   const [novaTarefa, setNovaTarefa] = useState("");
   const [tarefas, setTarefas] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [prova, setProva] = useState(false);
+  const { sair } = useContext(AuthContext);
 
+  //   function cadastrar(){}
   const cadastrar = async () => {
     const task = {
-      description: "description",
-      done: false,
-      prioridade: "alta",
       title: novaTarefa,
+      description: "description",
+      prioridade: "alta",
+      done: false,
     };
 
     try {
-      const { data } = await axios.post(url, task);
+      const { data } = await api.post("/tasklist", task);
       console.log(data);
-      // forma nova
+      // console.log([...tarefas, novaTarefa]); FORMA ANTIGA
       setTarefas([...tarefas, data]);
-      // forma antiga console.log([...tarefas, novaTarefa]);
       setNovaTarefa("");
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      console.log(err);
     }
   };
 
-  // TODO: FAZER MÉTODO DE EDITAR - PUT DICA: vai ser parecido com o cadastrar, tenho que saber qual objeto estou editando.
-
-  const editar = async (id) => {
-    const task = {
-      title: "alta",
-    };
-    try {
-      const { data } = await axios.put(`${url}/${id}`, task);
-      const arrayEditado = tarefas.map((item) => {
-        if (id == item.id) {
-          return data;
-        }
-        return item;
-      });
-      console.log(data);
-      setTarefas(arrayEditado);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const excluir = async (id) => {
-    console.log(`Excluir tarefa: ${id}`);
+  const excluirTarefa = async (id) => {
+    console.log("Excluir Tarefa: ", id);
     try {
       const { data } = await axios.delete(`${url}/${id}`);
       console.log(data);
+      // const arrayFiltrado = tarefas.filter((item) => item.id != data.id);
       const arrayFiltrado = tarefas.filter((item) => item.id != id);
       setTarefas(arrayFiltrado);
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      console.log(err);
     }
   };
 
+  // async function getTasks(){}
   const getTasks = async () => {
     setLoading(true);
     try {
       // const dados = await fetch(
-      //   "https://6542c2c401b5e279de1f8b8f.mockapi.io/tasklist"
+      //   "https://6542c27001b5e279de1f8a8c.mockapi.io/tasklist"
       // );
       // const infos = await dados.json();
       const { data } = await axios.get(url);
       console.log(data);
       setTarefas(data);
-    } catch (e) {
-      console.log(e);
+    } catch (err) {
+      console.log(err);
     } finally {
       setLoading(false);
     }
   };
 
+  const editarTarefa = async (id) => {
+    const task = {
+      prioridade: "alta",
+    };
+    try {
+      const { data } = await axios.put(`${url}/1`, task);
+      const arrayEditado = tarefas.map((item) => {
+        if (1 == item.id) {
+          return data;
+        }
+        return item;
+      });
+      setTarefas(arrayEditado);
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // O useEffect é executado logo após a PRIMEIRA montagem do componente na tela
+  // useEffect( () => {}, [])
   useEffect(() => {
     getTasks();
   }, []);
 
   useEffect(() => {
-    console.log("Passou um useEffect");
+    console.log("SOU UM USEEFFECT!");
   }, []);
 
-  //if (loading) return <h1>CARREGANDO....</h1>;
+  // if (loading) return <h1>CARREGANDO.....</h1>;
 
   return (
-    <div>
-      <main>
-        <h1>Lista de Tarefas</h1>
-        <button onClick={getTasks} disabled={loading}>
-          Get Tasks
-        </button>
-        <section className="my-border">
-          <CreateTask
-            value={novaTarefa}
-            setValue={setNovaTarefa}
-            cadastrar={cadastrar}
+    <main>
+      <h1>Lista de Tarefas</h1>
+      <button onClick={sair}>Deslogar</button>
+      <section>
+        <CreateTask
+          novaTarefa={novaTarefa}
+          setNovaTarefa={setNovaTarefa}
+          cadastrar={cadastrar}
+        />
+      </section>
+      <section>
+        <h2>Lista de Tarefas</h2>
+        {tarefas.map((item) => (
+          <Task
+            key={item.id}
+            item={item}
+            excluirTarefa={excluirTarefa}
+            editarTarefa={editarTarefa}
           />
-        </section>
-        <section className="my-border">
-          <h2>Lista de tarefas</h2>
-          {tarefas.map((item) => (
-            <Task key={item.id} item={item} excluir={excluir} editar={editar} />
-          ))}
-        </section>
-      </main>
-    </div>
+        ))}
+      </section>
+    </main>
   );
-}
+};
 
 export default TaskList;
